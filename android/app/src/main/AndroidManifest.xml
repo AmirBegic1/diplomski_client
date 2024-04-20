@@ -1,4 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <application
         android:label="diplomski_client"
         android:name="${applicationName}"
@@ -26,6 +29,10 @@
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCteorlJ3CV6lbOMqr_XmpCu33jiWgw2OQ"/>
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />

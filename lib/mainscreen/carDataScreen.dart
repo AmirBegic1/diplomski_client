@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:diplomski_client/main.dart';
 import 'package:diplomski_client/mainscreen/mainscreen.dart';
@@ -30,7 +29,7 @@ class _CarDataScreenState extends State<CarDataScreen> {
                 child: Column(
           children: [
             SizedBox(height: 72.0),
-            Text("RYDE",
+            const Text("RYDE",
                 style: TextStyle(
                     fontFamily: "Zelda-Regular",
                     fontSize: 80,
@@ -96,7 +95,7 @@ class _CarDataScreenState extends State<CarDataScreen> {
                           color: Colors.white,
                         ),
                         elevation: 12,
-                        onChanged: (String newVal) {
+                        onChanged: (String? newVal) {
                           setState(() {
                             if (newVal != null) categoryVar = newVal;
                           });
@@ -110,33 +109,37 @@ class _CarDataScreenState extends State<CarDataScreen> {
                     SizedBox(height: 25.0),
                     Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16.0),
-                        child: RaisedButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                side: BorderSide(
-                                    color: Colors.black87, width: 1.9)),
+                        child: TextButton(
+                            style: TextButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                    side: const BorderSide(
+                                        color: Colors.black87, width: 1.9)),
+                                backgroundColor: Colors.teal),
                             onPressed: () {
-                              RegExp exp = new RegExp(
+                              RegExp exp = RegExp(
                                   r"^[A-Za-z][0-9][0-9]-[A-Za-z]-[0-9][0-9][0-9]$",
                                   caseSensitive: false,
                                   multiLine: false);
-                              if (modelTEC.text.isEmpty)
+                              if (modelTEC.text.isEmpty) {
                                 displayToastMessage(
                                     "The car model field is mandatory",
                                     context);
-                              else if (!exp.hasMatch(platesTEC.text))
+                              } else if (!exp.hasMatch(platesTEC.text))
+                                // ignore: curly_braces_in_flow_control_structures
                                 displayToastMessage(
                                     "The registration plates are not valid",
                                     context);
                               else if (colorTEC.text.isEmpty)
+                                // ignore: curly_braces_in_flow_control_structures
                                 displayToastMessage(
                                     "The car color field is mandatory",
                                     context);
                               else
+                                // ignore: curly_braces_in_flow_control_structures
                                 saveCarDataToDB(context);
                             },
-                            color: Colors.teal,
-                            child: Padding(
+                            child: const Padding(
                                 padding: EdgeInsets.all(17.0),
                                 child: Row(
                                     mainAxisAlignment:
@@ -157,7 +160,7 @@ class _CarDataScreenState extends State<CarDataScreen> {
   }
 
   void saveCarDataToDB(context) {
-    String uid = currentUser.uid;
+    String uid = currentUser!.uid;
     Map carMap = {
       "car_color": colorTEC.text,
       "car_plates": platesTEC.text,

@@ -6,7 +6,7 @@ class FareCollect extends StatelessWidget {
   final String paymentMethod;
   final double fare;
 
-  FareCollect({this.paymentMethod, this.fare});
+  FareCollect({required this.paymentMethod, required this.fare});
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +29,12 @@ class FareCollect extends StatelessWidget {
               ),
               SizedBox(height: 22.0),
               Text("${fare.toStringAsFixed(2)} BAM",
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 45.0,
                       fontFamily: "Brand-Regular",
                       color: Colors.teal)),
               SizedBox(height: 22.0),
-              Padding(
+              const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.0),
                   child: Text(
                       "This is the total trip amount that has been charged to the rider (the fare may differ based on the trip completion)",
@@ -43,17 +43,25 @@ class FareCollect extends StatelessWidget {
               SizedBox(height: 30.0),
               Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.0),
-                  child: RaisedButton(
+                  child: TextButton(
                       onPressed: () async {
                         Navigator.pop(context);
                         Navigator.pop(context);
                         processMethods.enableHomeLocationUpdate();
                       },
-                      shape: RoundedRectangleBorder(
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.teal,
+                        shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
-                          side: BorderSide(color: Colors.black, width: 1.2)),
-                      color: Colors.teal,
-                      child: Padding(
+                          side: BorderSide(color: Colors.black, width: 1.2),
+                        ),
+                      ),
+
+                      // style: RoundedRectangleBorder(
+                      //     borderRadius: BorderRadius.circular(30),
+                      //     side: BorderSide(color: Colors.black, width: 1.2)),
+                      // color: Colors.teal,
+                      child: const Padding(
                         padding: EdgeInsets.all(17.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

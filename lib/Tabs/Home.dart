@@ -2,13 +2,12 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/utils/stream_subscriber_mixin.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
+// import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:diplomski_client/Assistant/processMethods.dart';
 import 'package:flutter_geofire/flutter_geofire.dart';
 import 'package:diplomski_client/Models/Drivers.dart';
 import 'package:diplomski_client/Notifications/PushNotification.dart';
@@ -30,7 +29,7 @@ class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin<HomePage> {
   Completer<GoogleMapController> _controllerGMap = Completer();
 
-  GoogleMapController GMap;
+  late GoogleMapController GMap;
 
   var Locator = Geolocator();
 
@@ -48,10 +47,10 @@ class _HomePageState extends State<HomePage>
 
   getRideType() {
     driverRef
-        .child(currentUser.uid)
+        .child(currentUser!.uid)
         .child("car_data")
         .child("type")
-        .once()
+        .get()
         .then((DataSnapshot data) {
       if (data.value != null) {
         setState(() {
@@ -62,6 +61,8 @@ class _HomePageState extends State<HomePage>
   }
 
   void locateUser() async {
+    LocationPermission permission;
+    permission = await Geolocator.requestPermission();
     Position pos = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
     currentPos = pos;
@@ -74,8 +75,8 @@ class _HomePageState extends State<HomePage>
   }
 
   void getDriverInfo() async {
-    currentUser = await FirebaseAuth.instance.currentUser;
-    driverRef.child(currentUser.uid).once().then((DataSnapshot data) {
+    currentUser = FirebaseAuth.instance.currentUser!;
+    driverRef.child(currentUser!.uid).get().then((DataSnapshot data) {
       if (data.value != null) {
         drivers = Drivers.fromSnapshot(data);
       }
@@ -88,6 +89,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     FlutterStatusbarcolor.setNavigationBarWhiteForeground(true);
     return Stack(children: [
       GoogleMap(
@@ -110,11 +112,14 @@ class _HomePageState extends State<HomePage>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        side: BorderSide(color: Colors.black, width: 1.2)),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: TextButton(
+                    style: TextButton.styleFrom(
+                      shadowColor: statusColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          side: BorderSide(color: Colors.black, width: 1.2)),
+                    ),
                     onPressed: () {
                       if (!isActive) {
                         setOnline();
@@ -139,7 +144,7 @@ class _HomePageState extends State<HomePage>
                             context);
                       }
                     },
-                    color: statusColor,
+                    // color: statusColor,
                     child: Padding(
                         padding: EdgeInsets.all(13.0),
                         child: Row(
@@ -165,7 +170,7 @@ class _HomePageState extends State<HomePage>
     currentPos = pos;
     Geofire.initialize("driversOnline");
     Geofire.setLocation(
-        currentUser.uid, currentPos.latitude, currentPos.longitude);
+        currentUser!.uid, currentPos!.latitude, currentPos!.longitude);
     requestsRef.set("searching");
     requestsRef.onValue.listen((event) {});
   }
@@ -174,14 +179,14 @@ class _HomePageState extends State<HomePage>
     homePageSubscription = Geolocator.getPositionStream().listen((Position p) {
       currentPos = p;
       if (isActive)
-        Geofire.setLocation(currentUser.uid, p.latitude, p.longitude);
+        Geofire.setLocation(currentUser!.uid, p.latitude, p.longitude);
       LatLng pos = LatLng(p.latitude, p.longitude);
       GMap.animateCamera(CameraUpdate.newLatLng(pos));
     });
   }
 
   void setOffline() {
-    Geofire.removeLocation(currentUser.uid);
+    Geofire.removeLocation(currentUser!.uid);
     requestsRef.onDisconnect();
     requestsRef.remove();
   }

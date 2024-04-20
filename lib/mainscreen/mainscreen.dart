@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+// import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:diplomski_client/Tabs/Earnings.dart';
 import 'package:diplomski_client/Tabs/Home.dart';
 import 'package:diplomski_client/Tabs/Profile.dart';
@@ -13,7 +13,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen>
     with SingleTickerProviderStateMixin {
-  TabController tabController;
+  late TabController tabController;
   int index = 0;
 
   void onTabItemSelect(int newIndex) {
@@ -45,7 +45,7 @@ class _MainScreenState extends State<MainScreen>
         children: [HomePage(), EarningsPage(), RatingPage(), ProfilePage()],
       ),
       bottomNavigationBar: BottomNavigationBar(
-          items: <BottomNavigationBarItem>[
+          items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.map), label: "Map"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.credit_card), label: "Earnings"),

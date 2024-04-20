@@ -6,10 +6,11 @@ import 'package:diplomski_client/main.dart';
 import 'package:diplomski_client/mainscreen/RideScreen.dart';
 import 'package:diplomski_client/mainscreen/registrationScreen.dart';
 import 'package:diplomski_client/mapConfig.dart';
+import 'package:flutter/widgets.dart';
 
 class NotificationDialog extends StatelessWidget {
   final RideInfo details;
-  NotificationDialog({this.details});
+  NotificationDialog({required this.details});
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -45,7 +46,7 @@ class NotificationDialog extends StatelessWidget {
                             SizedBox(width: 15.0),
                             Expanded(
                                 child: Container(
-                              child: Text(details.pickup_address,
+                              child: Text(details.pickup_address!,
                                   style: TextStyle(fontSize: 16.0)),
                             ))
                           ],
@@ -58,7 +59,7 @@ class NotificationDialog extends StatelessWidget {
                             SizedBox(width: 15.0),
                             Expanded(
                               child: Container(
-                                child: Text(details.dropoff_address,
+                                child: Text(details.dropoff_address!,
                                     style: TextStyle(fontSize: 16.0)),
                               ),
                             )
@@ -71,14 +72,18 @@ class NotificationDialog extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        FlatButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25.0),
-                                side: BorderSide(color: Colors.red)),
-                            color: Colors.white,
-                            textColor: Colors.red,
-                            padding: EdgeInsets.symmetric(
-                                vertical: 12.0, horizontal: 25),
+                        TextButton(
+                            style: TextButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25.0),
+                                  side: BorderSide(color: Colors.red)),
+                              backgroundColor: Colors.white,
+                              textStyle: const TextStyle(
+                                color: Colors.red,
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 12.0, horizontal: 25),
+                            ),
                             onPressed: () {
                               audioPlayer.stop();
                               Navigator.pop(context);
@@ -86,18 +91,22 @@ class NotificationDialog extends StatelessWidget {
                             child: Text("Cancel".toUpperCase(),
                                 style: TextStyle(fontSize: 14.0))),
                         SizedBox(width: 25.0),
-                        RaisedButton(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 12.0, horizontal: 25),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25.0),
-                                side: BorderSide(color: Colors.green)),
+                        TextButton(
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 12.0, horizontal: 25),
+                              backgroundColor: Colors.green,
+                              textStyle: const TextStyle(
+                                color: Colors.white,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25.0),
+                                  side: const BorderSide(color: Colors.green)),
+                            ),
                             onPressed: () {
                               audioPlayer.stop();
                               checkAvailableRide(context);
                             },
-                            color: Colors.green,
-                            textColor: Colors.white,
                             child: Text("Accept".toUpperCase(),
                                 style: TextStyle(fontSize: 14.0)))
                       ],
@@ -108,7 +117,7 @@ class NotificationDialog extends StatelessWidget {
   }
 
   void checkAvailableRide(context) {
-    requestsRef.once().then((DataSnapshot value) {
+    requestsRef.get().then((DataSnapshot value) {
       Navigator.pop(context);
       String rideId = "";
       if (value.value != null) {

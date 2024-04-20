@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_geofire/flutter_geofire.dart';
-import 'package:scda_driver_client/Assistant/httpRequest.dart';
+import 'package:diplomski_client/Assistant/httpRequest.dart';
 import 'package:intl/intl.dart';
 import 'package:diplomski_client/DataHandler/appData.dart';
 import 'package:diplomski_client/Models/Directions.dart';
@@ -18,7 +18,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
 class processMethods {
-  static Future<Directions> getDirections(LatLng start, LatLng dest) async {
+  static Future<Directions?> getDirections(LatLng start, LatLng dest) async {
     String dir =
         "https://maps.googleapis.com/maps/api/directions/json?origin=${start.latitude},${start.longitude}&destination=${dest.latitude},${dest.longitude}&key=$mapKey";
     var response = await httpRequest.getRequest(dir);
@@ -37,8 +37,8 @@ class processMethods {
   }
 
   static double fareCalculate(Directions directions) {
-    double timeTaken = (directions.timeTaken / 60) * 0.20;
-    double distanceTaken = (directions.distance / 1000) * 0.20;
+    double timeTaken = (directions.timeTaken! / 60) * 0.20;
+    double distanceTaken = (directions.distance! / 1000) * 0.20;
     double total = timeTaken + distanceTaken;
     if (rideType == "premium")
       return total * 1.5;
@@ -49,21 +49,21 @@ class processMethods {
   }
 
   static void disableHomeLocationUpdate() {
-    homePageSubscription.pause();
-    Geofire.removeLocation(currentUser.uid);
+    homePageSubscription?.pause();
+    Geofire.removeLocation(currentUser!.uid);
   }
 
   static void enableHomeLocationUpdate() {
-    homePageSubscription.resume();
+    homePageSubscription?.resume();
     Geofire.setLocation(
-        currentUser.uid, currentPos.latitude, currentPos.longitude);
+        currentUser!.uid, currentPos!.latitude, currentPos!.longitude);
   }
 
   static void getRidesHistory(context) {
     driverRef
-        .child(currentUser.uid)
+        .child(currentUser!.uid)
         .child("earnings")
-        .once()
+        .get()
         .then((DataSnapshot data) {
       if (data.value != null) {
         String earnings = data.value.toString();
@@ -73,12 +73,12 @@ class processMethods {
     });
 
     driverRef
-        .child(currentUser.uid)
+        .child(currentUser!.uid)
         .child("history")
-        .once()
+        .get()
         .then((DataSnapshot data) {
       if (data.value != null) {
-        Map<dynamic, dynamic> values = data.value;
+        Map<dynamic, dynamic> values = data.value as Map;
         int counter = values.length;
         Provider.of<AppData>(context, listen: false)
             .updateNumberOfTrips(counter);
@@ -96,7 +96,7 @@ class processMethods {
     Provider.of<AppData>(context, listen: false).resetHistoryMap();
     var keys = Provider.of<AppData>(context, listen: false).tripKeys;
     for (String element in keys) {
-      newRequestsRef.child(element).once().then((DataSnapshot data) {
+      newRequestsRef.child(element).get().then((DataSnapshot data) {
         if (data.value != null) {
           var history = RideHistory.fromSnapshot(data);
           Provider.of<AppData>(context, listen: false)

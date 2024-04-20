@@ -3,17 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:diplomski_client/main.dart';
 import 'package:diplomski_client/mainscreen/carDataScreen.dart';
 import 'package:diplomski_client/mainscreen/loginScreen.dart';
-import 'package:diplomski_client/mainscreen/mainscreen.dart';
+// import 'package:diplomski_client/mainscreen/mainscreen.dart';
 import 'package:diplomski_client/mapConfig.dart';
 import 'package:diplomski_client/widgets/progressDialog.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+// ignore: must_be_immutable
 class RegistrationScreen extends StatelessWidget {
   static const String idScreen = "register";
   TextEditingController nameTEC = TextEditingController();
   TextEditingController emailTEC = TextEditingController();
   TextEditingController phoneTEC = TextEditingController();
   TextEditingController passTEC = TextEditingController();
+
+  RegistrationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +28,14 @@ class RegistrationScreen extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: 100),
-              Text("RYDE",
+              const Text("RYDE",
                   style: TextStyle(
                       fontFamily: "Zelda-Regular",
                       fontSize: 80,
                       letterSpacing: 15.0,
                       color: Colors.white)),
               SizedBox(height: 22),
-              Text(
+              const Text(
                 "Register as Driver",
                 style: TextStyle(
                     fontSize: 24.0,
@@ -48,7 +51,7 @@ class RegistrationScreen extends StatelessWidget {
                       TextField(
                         controller: nameTEC,
                         keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white)),
                             labelText: "Name",
@@ -62,7 +65,7 @@ class RegistrationScreen extends StatelessWidget {
                       TextField(
                         controller: emailTEC,
                         keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white)),
                             labelText: "Email",
@@ -76,7 +79,7 @@ class RegistrationScreen extends StatelessWidget {
                       TextField(
                         controller: phoneTEC,
                         keyboardType: TextInputType.phone,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white)),
                             labelText: "Phone",
@@ -90,7 +93,7 @@ class RegistrationScreen extends StatelessWidget {
                       TextField(
                         controller: passTEC,
                         obscureText: true,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white)),
                             labelText: "Password",
@@ -101,20 +104,22 @@ class RegistrationScreen extends StatelessWidget {
                         style: TextStyle(fontSize: 14.0, color: Colors.white),
                       ),
                       SizedBox(height: 40.0),
-                      RaisedButton(
-                        color: Colors.teal,
-                        textColor: Colors.white,
-                        child: Container(
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.teal,
+                          textStyle: const TextStyle(color: Colors.white),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0)),
+                        ),
+                        child: const SizedBox(
                             height: 50.0,
                             child: Center(
                                 child: Text("Create Account",
                                     style: TextStyle(
                                         fontSize: 18.0,
                                         fontFamily: "Brand-Bold")))),
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0)),
                         onPressed: () {
-                          RegExp exp = new RegExp(
+                          RegExp exp = RegExp(
                               r"^[A-Za-z0-9+_.-]+@[A-Za-z0-9+_.-]+$",
                               caseSensitive: false,
                               multiLine: false);
@@ -139,13 +144,15 @@ class RegistrationScreen extends StatelessWidget {
                       )
                     ],
                   )),
-              FlatButton(
-                  textColor: Colors.white,
+              TextButton(
+                  style: TextButton.styleFrom(
+                    textStyle: const TextStyle(color: Colors.white),
+                  ),
                   onPressed: () {
                     Navigator.pushNamedAndRemoveUntil(
                         context, LoginScreen.idScreen, (route) => false);
                   },
-                  child: Text("Already have an account? Login here",
+                  child: const Text("Already have an account? Login here",
                       style: TextStyle(color: Colors.teal)))
             ],
           ),
@@ -163,9 +170,10 @@ class RegistrationScreen extends StatelessWidget {
         builder: (BuildContext context) {
           return ProgressDialog(message: "Registering user. Please wait");
         });
-    final User fbUser = (await _auth
+    final User? fbUser = (await _auth
             .createUserWithEmailAndPassword(
                 email: emailTEC.text, password: passTEC.text)
+            // ignore: body_might_complete_normally_catch_error
             .catchError((errMsg) {
       Navigator.pop(context);
       displayToastMessage("Error: " + errMsg.toString(), context);

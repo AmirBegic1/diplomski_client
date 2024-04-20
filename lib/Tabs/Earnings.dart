@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+import 'package:flutter/services.dart';
+// import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:diplomski_client/Assistant/processMethods.dart';
 import 'package:diplomski_client/DataHandler/appData.dart';
@@ -24,12 +25,13 @@ class _EarningsPageState extends State<EarningsPage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: AppBar(
-        brightness: Brightness.dark,
         title: Text("Total earnings"),
         backgroundColor: Colors.black,
         centerTitle: true,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
       body: Column(
         children: [
@@ -63,8 +65,8 @@ class _EarningsPageState extends State<EarningsPage>
                   ]),
                 ]),
               )),
-          FlatButton(
-            padding: EdgeInsets.all(0),
+          TextButton(
+            // padding: EdgeInsets.all(0),
             onPressed: () {
               if (Provider.of<AppData>(context, listen: false).numberOfTrips !=
                   0)

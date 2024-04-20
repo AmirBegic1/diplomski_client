@@ -1,16 +1,20 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-class Users{
-  String id;
-  String email;
-  String name;
-  String phone;
+class Users {
+  String? id;
+  String? email;
+  String? name;
+  String? phone;
   Users({this.id, this.email, this.name, this.phone});
-  Users.snapShotRetrieve(DataSnapshot snap){
+
+  Map<String, dynamic> toMap() {
+    return {'email': email, 'name': name, 'phone': phone};
+  }
+
+  Users.snapShotRetrieve(DataSnapshot snap) {
     id = snap.key;
-    email = snap.value["email"];
-    name = snap.value["name"];
-    phone = snap.value["phone"];
+    email = (snap.child("email").value.toString());
+    name = (snap.child("name").value.toString());
+    phone = (snap.child("phone").value.toString());
   }
 }

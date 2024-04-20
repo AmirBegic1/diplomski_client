@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+// import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:diplomski_client/DataHandler/appData.dart';
 import 'package:diplomski_client/widgets/RideHistoryItem.dart';
@@ -15,7 +15,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          brightness: Brightness.dark,
           centerTitle: true,
           title: Text("Trip history"),
           backgroundColor: Colors.black87,
@@ -24,7 +23,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
               Navigator.pop(context);
             },
             icon: Icon(Icons.keyboard_arrow_left),
-          )),
+          ),
+          systemOverlayStyle: SystemUiOverlayStyle.light),
       body: ListView.separated(
         padding: EdgeInsets.all(0),
         itemBuilder: (context, index) => RideHistoryItem(

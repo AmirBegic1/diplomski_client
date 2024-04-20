@@ -14,20 +14,18 @@ import 'package:diplomski_client/mapConfig.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  currentUser = FirebaseAuth.instance.currentUser;
+  // currentUser = FirebaseAuth.instance.currentUser!;
   runApp(MyApp());
 }
 
-DatabaseReference userRef =
-    FirebaseDatabase.instance.reference().child("users");
-DatabaseReference driverRef =
-    FirebaseDatabase.instance.reference().child("drivers");
+DatabaseReference userRef = FirebaseDatabase.instance.ref().child("users");
+DatabaseReference driverRef = FirebaseDatabase.instance.ref().child("drivers");
 DatabaseReference newRequestsRef =
-    FirebaseDatabase.instance.reference().child("Ride request");
+    FirebaseDatabase.instance.ref().child("Ride request");
 DatabaseReference requestsRef = FirebaseDatabase.instance
-    .reference()
+    .ref()
     .child("drivers")
-    .child(currentUser.uid)
+    .child(currentUser!.uid)
     .child("newRide");
 
 class MyApp extends StatelessWidget {

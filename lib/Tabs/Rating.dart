@@ -1,11 +1,12 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+import 'package:flutter/services.dart';
+// import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:diplomski_client/DataHandler/appData.dart';
 import 'package:diplomski_client/main.dart';
 import 'package:diplomski_client/mapConfig.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
+// import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class RatingPage extends StatefulWidget {
   @override
@@ -25,9 +26,9 @@ class _RatingPageState extends State<RatingPage>
 
   getRatings() {
     driverRef
-        .child(currentUser.uid)
+        .child(currentUser!.uid)
         .child("ratings")
-        .once()
+        .get()
         .then((DataSnapshot data) {
       if (data.value != null) {
         double ratings = double.parse(data.value.toString()) /
@@ -64,10 +65,10 @@ class _RatingPageState extends State<RatingPage>
     super.build(context);
     return Scaffold(
       appBar: AppBar(
-        brightness: Brightness.dark,
         title: Text("Your current rating"),
         backgroundColor: Colors.black87,
         centerTitle: true,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
       backgroundColor: Colors.black87,
       body: Dialog(
@@ -98,14 +99,14 @@ class _RatingPageState extends State<RatingPage>
                     ? SizedBox()
                     : Column(children: [
                         SizedBox(height: 10.0),
-                        SmoothStarRating(
-                            rating: numberOfStars,
-                            color: Colors.teal,
-                            borderColor: Colors.teal,
-                            allowHalfRating: true,
-                            starCount: 5,
-                            size: 45,
-                            isReadOnly: true),
+                        // SmoothStarRating(
+                        //     rating: numberOfStars,
+                        //     color: Colors.teal,
+                        //     borderColor: Colors.teal,
+                        //     allowHalfRating: true,
+                        //     starCount: 5,
+                        //     size: 45,
+                        //     isReadOnly: true),
                         SizedBox(height: 10.0),
                         Text(title,
                             style: TextStyle(
