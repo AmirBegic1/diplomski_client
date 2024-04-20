@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:diplomski_client/Models/RideHistory.dart';
-import 'package:diplomski_client/Models/address.dart';
 
 class AppData extends ChangeNotifier {
   String earnings = "0";

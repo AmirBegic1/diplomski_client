@@ -1,19 +1,17 @@
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/material.dart';
+
 import 'package:flutter_geofire/flutter_geofire.dart';
 import 'package:diplomski_client/Assistant/httpRequest.dart';
 import 'package:intl/intl.dart';
 import 'package:diplomski_client/DataHandler/appData.dart';
 import 'package:diplomski_client/Models/Directions.dart';
 import 'package:diplomski_client/Models/RideHistory.dart';
-import 'package:diplomski_client/Models/Users.dart';
-import 'package:diplomski_client/Models/address.dart';
+
 import 'package:diplomski_client/main.dart';
 import 'package:diplomski_client/mapConfig.dart';
-import 'package:geolocator/geolocator.dart';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 

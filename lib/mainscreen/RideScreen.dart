@@ -385,7 +385,6 @@ class _RideScreenState extends State<RideScreen> {
   void updateCurrentDetails() async {
     if (!inRequest) {
       inRequest = true;
-      if (myPos == null) return;
       var position = LatLng(myPos.latitude, myPos.longitude);
       LatLng dest;
       if (status == "accepted") {
