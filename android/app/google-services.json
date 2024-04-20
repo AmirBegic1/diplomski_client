@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "845547046753",
+    "firebase_url": "https://rider-diplomski-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "rider-diplomski",
+    "storage_bucket": "rider-diplomski.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845547046753:android:e146b47d4b04ce09286720",
+        "android_client_info": {
+          "package_name": "com.example.diplomski_client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "845547046753-e2ph2roc87hbt4m1ua21tjr66o6lfhq2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCy6QjH17zuFNrO-j4MvYdh589fO_GSiDk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "845547046753-e2ph2roc87hbt4m1ua21tjr66o6lfhq2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "845547046753-e5err1o45321lqu8bjnrekui7i0k9rhf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.diplomskiUser"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845547046753:android:7c22b5902e37edbc286720",
+        "android_client_info": {
+          "package_name": "com.example.diplomski_user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "845547046753-e2ph2roc87hbt4m1ua21tjr66o6lfhq2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCy6QjH17zuFNrO-j4MvYdh589fO_GSiDk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "845547046753-e2ph2roc87hbt4m1ua21tjr66o6lfhq2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "845547046753-e5err1o45321lqu8bjnrekui7i0k9rhf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.diplomskiUser"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
