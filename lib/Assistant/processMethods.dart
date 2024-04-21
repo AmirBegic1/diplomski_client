@@ -16,11 +16,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
 class processMethods {
-  static Future<Directions?> getDirections(LatLng start, LatLng dest) async {
+  static Future<Directions> getDirections(LatLng start, LatLng dest) async {
     String dir =
         "https://maps.googleapis.com/maps/api/directions/json?origin=${start.latitude},${start.longitude}&destination=${dest.latitude},${dest.longitude}&key=$mapKey";
     var response = await httpRequest.getRequest(dir);
-    if (response == "failed") return null;
+
     Directions directions = Directions();
     directions.checkpoints =
         response["routes"][0]["overview_polyline"]["points"];

@@ -14,7 +14,7 @@ import 'package:diplomski_client/mapConfig.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // currentUser = FirebaseAuth.instance.currentUser!;
+  // currentUser = FirebaseAuth.instance.currentconst User!;
   runApp(MyApp());
 }
 
@@ -29,9 +29,11 @@ DatabaseReference requestsRef = FirebaseDatabase.instance
     .child("newRide");
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
         statusBarColor: Colors.black,
         statusBarIconBrightness: Brightness.light));
     return ChangeNotifierProvider(

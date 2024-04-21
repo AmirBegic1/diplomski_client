@@ -16,11 +16,6 @@ import 'package:diplomski_client/mainscreen/registrationScreen.dart';
 import 'package:diplomski_client/mapConfig.dart';
 
 class HomePage extends StatefulWidget {
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(44.2025046, 17.8979634),
-    zoom: 14.4746,
-  );
-
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -29,7 +24,9 @@ class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin<HomePage> {
   Completer<GoogleMapController> _controllerGMap = Completer();
 
-  late GoogleMapController GMap;
+  GoogleMapController? GMap;
+
+  Future<LocationPermission> permission = Geolocator.requestPermission();
 
   var Locator = Geolocator();
 
@@ -61,17 +58,14 @@ class _HomePageState extends State<HomePage>
   }
 
   void locateUser() async {
-    LocationPermission permission;
-    permission = await Geolocator.requestPermission();
     Position pos = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+        desiredAccuracy: LocationAccuracy.medium);
     currentPos = pos;
     LatLng latLngPosition = LatLng(pos.latitude, pos.longitude);
-    CameraPosition cameraPos =
-        new CameraPosition(target: latLngPosition, zoom: 16);
-    GMap.animateCamera(CameraUpdate.newCameraPosition(cameraPos));
-    //String address = await processMethods.searchCoordinatesAddress(pos, context);
-    //print("This is your address : " + address);
+    CameraPosition cameraPos = CameraPosition(target: latLngPosition, zoom: 16);
+    GMap?.animateCamera(CameraUpdate.newCameraPosition(cameraPos));
+    // String address = await processMethods.searchCoordinatesAddress(pos, context);
+    // print("This is your address : " + address);
   }
 
   void getDriverInfo() async {
@@ -87,18 +81,27 @@ class _HomePageState extends State<HomePage>
     getRideType();
   }
 
+  static final CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(44.198013, 17.924672),
+    zoom: 14,
+  );
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    FlutterStatusbarcolor.setNavigationBarWhiteForeground(true);
+    // FlutterStatusbarcolor.setNavigationBarWhiteForeground(true);
     return Stack(children: [
       GoogleMap(
+
+          // polylines: Set<Marker>.of(polylines.value),
           mapType: MapType.normal,
           myLocationButtonEnabled: true,
-          initialCameraPosition: HomePage._kGooglePlex,
+          initialCameraPosition: _kGooglePlex,
           myLocationEnabled: true,
-          buildingsEnabled: true,
-          padding: EdgeInsets.only(top: 20),
+          zoomGesturesEnabled: true,
+          zoomControlsEnabled: true,
+          // buildingsEnabled: true,
+          padding: EdgeInsets.only(top: 30, bottom: 20),
           onMapCreated: (GoogleMapController controller) {
             _controllerGMap.complete(controller);
             GMap = controller;
@@ -181,7 +184,7 @@ class _HomePageState extends State<HomePage>
       if (isActive)
         Geofire.setLocation(currentUser!.uid, p.latitude, p.longitude);
       LatLng pos = LatLng(p.latitude, p.longitude);
-      GMap.animateCamera(CameraUpdate.newLatLng(pos));
+      GMap?.animateCamera(CameraUpdate.newLatLng(pos));
     });
   }
 

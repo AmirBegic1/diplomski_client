@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
+// ignore: camel_case_types
 class httpRequest {
-  static Future<dynamic> getRequest(String url) async{
+  static Future<dynamic> getRequest(String url) async {
     http.Response res = await http.get(Uri.parse(url));
     try {
       if (res.statusCode == 200) {
@@ -13,7 +14,7 @@ class httpRequest {
       } else {
         return "failed";
       }
-    }catch(e){
+    } catch (e) {
       return "failed";
     }
   }
