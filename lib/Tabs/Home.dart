@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 // import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 import 'package:geolocator/geolocator.dart';

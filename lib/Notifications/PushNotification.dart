@@ -11,15 +11,15 @@ import 'package:diplomski_client/main.dart';
 import 'package:diplomski_client/mapConfig.dart';
 
 class PushNotification {
-  final FirebaseMessaging fbMessage = FirebaseMessaging.instance;
-
+  final fbMessage = FirebaseMessaging.instance;
   Future init(context) async {
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+    FirebaseMessaging.instance.requestPermission();
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       getRequestInfo(getRideId(message.data), context);
     });
 
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
-      getRequestInfo(getRideId(message.data), context);
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      getRequestInfo(getRideId(message as Map<String, dynamic>), context);
     });
 
     // FirebaseMessaging.onResume.listen((RemoteMessage message) async {
@@ -34,7 +34,7 @@ class PushNotification {
     driverRef.child(currentUser!.uid).child("token").set(tok);
     fbMessage.subscribeToTopic("allDrivers");
     fbMessage.subscribeToTopic("allUsers");
-    return 'radi!';
+    return tok.toString();
   }
 
   String getRideId(Map<String, dynamic> message) {
@@ -91,6 +91,8 @@ class PushNotification {
             barrierDismissible: false,
             builder: (BuildContext context) =>
                 NotificationDialog(details: details));
+      } else {
+        print("NEEEEEEE RADIIIIIIIIIIIIIIIIIII");
       }
     });
   }

@@ -51,9 +51,9 @@ class processMethods {
     Geofire.removeLocation(currentUser!.uid);
   }
 
-  static void enableHomeLocationUpdate() {
+  static void enableHomeLocationUpdate() async{
     homePageSubscription?.resume();
-    Geofire.setLocation(
+  await  Geofire.setLocation(
         currentUser!.uid, currentPos!.latitude, currentPos!.longitude);
   }
 

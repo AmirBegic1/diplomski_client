@@ -31,7 +31,7 @@ class RideScreen extends StatefulWidget {
 
 class _RideScreenState extends State<RideScreen> {
   Completer<GoogleMapController> _controllerGMap = Completer();
-  late GoogleMapController RideGMap;
+  GoogleMapController? RideGMap;
   Set<Marker> marksSet = Set<Marker>();
   Set<Circle> circlesSet = Set<Circle>();
   Set<Polyline> lines = Set<Polyline>();
@@ -41,17 +41,17 @@ class _RideScreenState extends State<RideScreen> {
   var geolocator = Geolocator();
   var options = LocationSettings(accuracy: LocationAccuracy.bestForNavigation);
   BitmapDescriptor? animateIcon;
-  late Position myPos;
+  Position? myPos;
   String status = "accepted";
   String timeTaken = "";
   bool inRequest = false;
   String btnValue = "Arrived";
   Color btnColor = Colors.teal;
-  late Timer timer;
+  Timer? timer;
   int counter = 0;
 
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
     acceptRequest();
   }
@@ -74,7 +74,7 @@ class _RideScreenState extends State<RideScreen> {
       myPos = p;
       LatLng markerPos = LatLng(p.latitude, p.longitude);
       var rotate = MapKit.getMarkerRotation(oldCoords.latitude,
-          oldCoords.longitude, myPos.latitude, myPos.longitude);
+          oldCoords.longitude, myPos?.latitude, myPos?.longitude);
       Marker animation = Marker(
           markerId: MarkerId("animation"),
           position: markerPos,
@@ -83,7 +83,7 @@ class _RideScreenState extends State<RideScreen> {
           infoWindow: InfoWindow(title: "Current location"));
       setState(() {
         CameraPosition cameraPos = CameraPosition(target: markerPos, zoom: 17);
-        RideGMap.animateCamera(CameraUpdate.newCameraPosition(cameraPos));
+        RideGMap?.animateCamera(CameraUpdate.newCameraPosition(cameraPos));
         marksSet.removeWhere((marker) => marker.markerId.value == "animation");
         marksSet.add(animation);
       });
@@ -292,10 +292,10 @@ class _RideScreenState extends State<RideScreen> {
     var directions = await processMethods.getDirections(pickLatLng, dropLatLng);
     Navigator.pop(context);
     print("These are the encoded points for the destination: ");
-    print(directions?.checkpoints);
+    print(directions.checkpoints);
     PolylinePoints points = PolylinePoints();
     List<PointLatLng> pointsDecoded =
-        points.decodePolyline(directions!.checkpoints!);
+        points.decodePolyline(directions.checkpoints!);
     coords.clear();
     if (pointsDecoded.isNotEmpty) {
       pointsDecoded.forEach((PointLatLng point) {
@@ -331,7 +331,7 @@ class _RideScreenState extends State<RideScreen> {
     } else {
       bounds = LatLngBounds(southwest: pickLatLng, northeast: dropLatLng);
     }
-    RideGMap.animateCamera(CameraUpdate.newLatLngBounds(bounds, 70));
+    RideGMap?.animateCamera(CameraUpdate.newLatLngBounds(bounds, 70));
     Marker pickUpMarker = Marker(
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueYellow),
         position: pickLatLng,
@@ -385,7 +385,7 @@ class _RideScreenState extends State<RideScreen> {
   void updateCurrentDetails() async {
     if (!inRequest) {
       inRequest = true;
-      var position = LatLng(myPos.latitude, myPos.longitude);
+      var position = LatLng(myPos!.latitude, myPos!.longitude);
       LatLng dest;
       if (status == "accepted") {
         dest = widget.details.pickup!;
@@ -393,11 +393,9 @@ class _RideScreenState extends State<RideScreen> {
         dest = widget.details.dropoff!;
       }
       var directions = await processMethods.getDirections(position, dest);
-      if (directions != null) {
-        setState(() {
-          timeTaken = directions.timeTakenText!;
-        });
-      }
+      setState(() {
+        timeTaken = directions.timeTakenText!;
+      });
       inRequest = false;
     }
   }
@@ -410,17 +408,17 @@ class _RideScreenState extends State<RideScreen> {
   }
 
   endRide() async {
-    timer.cancel();
+    timer?.cancel();
     showDialog(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) =>
             ProgressDialog(message: "Please wait"));
-    var driverPos = LatLng(myPos.latitude, myPos.longitude);
+    var driverPos = LatLng(myPos!.latitude, myPos!.longitude);
     var dirs =
         await processMethods.getDirections(widget.details.pickup!, driverPos);
     Navigator.pop(context);
-    double fareTotal = processMethods.fareCalculate(dirs!);
+    double fareTotal = processMethods.fareCalculate(dirs);
     String rideId = widget.details.ride_request_id!;
     newRequestsRef.child(rideId).child("fares").set(fareTotal.toString());
     newRequestsRef.child(rideId).child("status").set("done");
