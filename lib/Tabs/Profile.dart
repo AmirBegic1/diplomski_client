@@ -64,11 +64,11 @@ class ProfilePage extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Text(drivers!.name!,
-                  style: TextStyle(fontSize: 30, color: Colors.white)),
+                  style: const TextStyle(fontSize: 30, color: Colors.white)),
               SizedBox(height: 20),
               ProfileInfo(
                   type: "Profile ID",
-                  text: drivers!.id!,
+                  text: drivers!.id,
                   icon: Icons.perm_identity),
               ProfileInfo(
                 type: "Email address",

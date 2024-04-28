@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage>
 
   Future<LocationPermission> permission = Geolocator.requestPermission();
 
-  var Locator = Geolocator();
+  var locator = Geolocator();
 
   String status = "Offline";
 
@@ -171,17 +171,19 @@ class _HomePageState extends State<HomePage>
         desiredAccuracy: LocationAccuracy.high);
     currentPos = pos;
     Geofire.initialize("driversOnline");
-    Geofire.setLocation(
+    await Geofire.setLocation(
         currentUser!.uid, currentPos!.latitude, currentPos!.longitude);
     requestsRef.set("searching");
     requestsRef.onValue.listen((event) {});
   }
 
-  void updateLocationAsync() {
-    homePageSubscription = Geolocator.getPositionStream().listen((Position p) {
+  void updateLocationAsync() async {
+    homePageSubscription =
+        Geolocator.getPositionStream().listen((Position p) async {
       currentPos = p;
-      if (isActive)
-        Geofire.setLocation(currentUser!.uid, p.latitude, p.longitude);
+      if (isActive) {
+        await Geofire.setLocation(currentUser!.uid, p.latitude, p.longitude);
+      }
       LatLng pos = LatLng(p.latitude, p.longitude);
       GMap?.animateCamera(CameraUpdate.newLatLng(pos));
     });

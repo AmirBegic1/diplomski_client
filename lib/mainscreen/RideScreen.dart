@@ -367,16 +367,16 @@ class _RideScreenState extends State<RideScreen> {
   void acceptRequest() {
     String rideId = widget.details.ride_request_id!;
     newRequestsRef.child(rideId).child("status").set("accepted");
-    newRequestsRef.child(rideId).child("driver_name").set(drivers!.name);
-    newRequestsRef.child(rideId).child("driver_phone").set(drivers!.phone);
-    newRequestsRef.child(rideId).child("driver_id").set(drivers!.id);
+    newRequestsRef.child(rideId).child("driver_name").set(drivers?.name);
+    newRequestsRef.child(rideId).child("driver_phone").set(drivers?.phone);
+    newRequestsRef.child(rideId).child("driver_id").set(drivers?.id);
     newRequestsRef
         .child(rideId)
         .child("car_details")
-        .set('${drivers!.car_color} - ${drivers!.car_model}');
+        .set('${drivers?.car_color} - ${drivers?.car_model}');
     Map location = {
-      "latitude": currentPos!.latitude.toString(),
-      "longitude": currentPos!.longitude.toString(),
+      "latitude": currentPos?.latitude.toString(),
+      "longitude": currentPos?.longitude.toString(),
     };
     newRequestsRef.child(rideId).child("driver_location").set(location);
     driverRef.child(currentUser!.uid).child("history").child(rideId).set(true);

@@ -10,7 +10,7 @@ import 'package:flutter/widgets.dart';
 
 class NotificationDialog extends StatelessWidget {
   final RideInfo details;
-  NotificationDialog({required this.details});
+  const NotificationDialog({required this.details});
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -116,12 +116,12 @@ class NotificationDialog extends StatelessWidget {
             )));
   }
 
-  void checkAvailableRide(context) {
-    requestsRef.get().then((DataSnapshot value) {
+  void checkAvailableRide(context) async {
+    await requestsRef.get().then((DataSnapshot snap) {
       Navigator.pop(context);
       String rideId = "";
-      if (value.value != null) {
-        rideId = value.value.toString();
+      if (snap.value != null) {
+        rideId = snap.value.toString();
       } else {
         displayToastMessage("Ride does not exist", context);
       }

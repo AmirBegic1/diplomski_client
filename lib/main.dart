@@ -15,9 +15,9 @@ import 'package:diplomski_client/mapConfig.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await FirebaseMessaging.instance.setAutoInitEnabled(true);
+  // await FirebaseMessaging.instance.setAutoInitEnabled(true);
   // currentUser = FirebaseAuth.instance.currentconst User!;
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 DatabaseReference userRef = FirebaseDatabase.instance.ref().child("users");

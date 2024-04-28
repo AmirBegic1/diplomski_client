@@ -20,7 +20,9 @@ class processMethods {
     String dir =
         "https://maps.googleapis.com/maps/api/directions/json?origin=${start.latitude},${start.longitude}&destination=${dest.latitude},${dest.longitude}&key=$mapKey";
     var response = await httpRequest.getRequest(dir);
-
+    if (response == "failed") {
+      throw ('NE RADI NESTOOOOOOOOOOOOOOOOOOOOOO! ');
+    }
     Directions directions = Directions();
     directions.checkpoints =
         response["routes"][0]["overview_polyline"]["points"];
@@ -51,9 +53,9 @@ class processMethods {
     Geofire.removeLocation(currentUser!.uid);
   }
 
-  static void enableHomeLocationUpdate() async{
+  static void enableHomeLocationUpdate() async {
     homePageSubscription?.resume();
-  await  Geofire.setLocation(
+    await Geofire.setLocation(
         currentUser!.uid, currentPos!.latitude, currentPos!.longitude);
   }
 

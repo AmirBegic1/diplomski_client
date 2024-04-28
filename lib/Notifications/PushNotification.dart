@@ -13,7 +13,7 @@ import 'package:diplomski_client/mapConfig.dart';
 class PushNotification {
   final fbMessage = FirebaseMessaging.instance;
   Future init(context) async {
-    FirebaseMessaging.instance.requestPermission();
+    // FirebaseMessaging.instance.requestPermission();
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       getRequestInfo(getRideId(message.data), context);
     });
