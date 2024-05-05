@@ -145,7 +145,7 @@ class _RideScreenState extends State<RideScreen> {
                 height: 290.0,
                 child: Padding(
                   padding:
-                      EdgeInsets.symmetric(horizontal: 24.0, vertical: 18.0),
+                      EdgeInsets.symmetric(horizontal: 24.0, vertical: 13.0),
                   child: Column(
                     children: [
                       Text(

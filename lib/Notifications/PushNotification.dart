@@ -14,12 +14,14 @@ class PushNotification {
   final fbMessage = FirebaseMessaging.instance;
   Future init(context) async {
     // FirebaseMessaging.instance.requestPermission();
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+      print("onMessage: $message");
       getRequestInfo(getRideId(message.data), context);
     });
 
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      getRequestInfo(getRideId(message as Map<String, dynamic>), context);
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+      print("onOppenedApp: $message");
+      getRequestInfo(getRideId(message.data), context);
     });
 
     // FirebaseMessaging.onResume.listen((RemoteMessage message) async {
@@ -38,9 +40,9 @@ class PushNotification {
   }
 
   String getRideId(Map<String, dynamic> message) {
-    String rideId = "";
+    String rideId;
     if (Platform.isAndroid) {
-      rideId = message['data']['ride_request_id'];
+      rideId = message['ride_request_id'];
     } else {
       rideId = message['ride_request_id'];
     }
@@ -50,8 +52,8 @@ class PushNotification {
   void getRequestInfo(String rideId, BuildContext context) {
     newRequestsRef.child(rideId).get().then((DataSnapshot data) {
       if (data.value != null) {
-        audioPlayer.open(Audio("sounds/ring.mp3"));
-        audioPlayer.play();
+        // audioPlayer.open(Audio("sounds/ring.mp3"));
+        // audioPlayer.play();
 //(data.child("phone").value.toString());
         double pickUpLat = double.parse(
             data.child("pickup").child('latitude').value.toString());
@@ -67,8 +69,8 @@ class PushNotification {
 
         String payment = data.child("payment_method").value.toString();
 
-        String rider_name = data.child("rider_name").toString();
-        String rider_phone = data.child("rider_phone").toString();
+        String rider_name = data.child("rider_name").value.toString();
+        String rider_phone = data.child("rider_phone").value.toString();
 
         RideInfo details = RideInfo();
 
@@ -92,7 +94,7 @@ class PushNotification {
             builder: (BuildContext context) =>
                 NotificationDialog(details: details));
       } else {
-        print("NEEEEEEE RADIIIIIIIIIIIIIIIIIII");
+        print("NE RADI roz push notification fajl");
       }
     });
   }

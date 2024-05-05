@@ -15,9 +15,21 @@ import 'package:diplomski_client/mapConfig.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await FirebaseMessaging.instance.getToken();
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+
   await FirebaseMessaging.instance.getInitialMessage();
-  // await FirebaseMessaging.instance.setAutoInitEnabled(true);
-  // currentUser = FirebaseAuth.instance.currentconst User!;
+  messaging = FirebaseMessaging.instance;
+
+  await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
   runApp(const MyApp());
 }
 

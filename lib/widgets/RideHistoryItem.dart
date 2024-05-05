@@ -37,15 +37,17 @@ class RideHistoryItem extends StatelessWidget {
                 TextButton(
                   onPressed: () {},
                   child: Container(
-                    padding: EdgeInsets.fromLTRB(0, 2, 0, 5),
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(processMethods.formatRideDate(history.created_at!),
-                            style: TextStyle(color: Colors.grey)),
-                        Text("${history.fares} BAM",
-                            style: TextStyle(
+                            style: const TextStyle(color: Colors.grey)),
+                        Text(
+                            processMethods
+                                .formatFares(history.fares.toString()),
+                            style: const TextStyle(
                                 fontFamily: "Brand-Bold",
                                 fontSize: 18,
                                 color: Colors.teal))

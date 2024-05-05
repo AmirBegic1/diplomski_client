@@ -28,7 +28,10 @@ class _EarningsPageState extends State<EarningsPage>
     super.build(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Total earnings"),
+        title: Text(
+          "Total earnings",
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.black,
         centerTitle: true,
         systemOverlayStyle: SystemUiOverlayStyle.light,

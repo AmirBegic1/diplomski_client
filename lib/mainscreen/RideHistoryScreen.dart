@@ -16,17 +16,18 @@ class _HistoryScreenState extends State<HistoryScreen> {
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
-          title: Text("Trip history"),
+          title:
+              const Text("Trip history", style: TextStyle(color: Colors.white)),
           backgroundColor: Colors.black87,
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.keyboard_arrow_left),
+            icon: const Icon(Icons.keyboard_arrow_left, color: Colors.white),
           ),
           systemOverlayStyle: SystemUiOverlayStyle.light),
       body: ListView.separated(
-        padding: EdgeInsets.all(0),
+        padding: EdgeInsets.all(1),
         itemBuilder: (context, index) => RideHistoryItem(
           history:
               Provider.of<AppData>(context, listen: false).historyKeys[index],

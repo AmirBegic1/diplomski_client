@@ -67,8 +67,11 @@ class processMethods {
         .then((DataSnapshot data) {
       if (data.value != null) {
         String earnings = data.value.toString();
+        double earning = double.parse(earnings);
+        String gotovo = earning.toStringAsFixed(3);
+
         Provider.of<AppData>(context, listen: false)
-            .updateTotalEarnings(earnings);
+            .updateTotalEarnings(gotovo);
       }
     });
 
@@ -104,6 +107,12 @@ class processMethods {
         }
       });
     }
+  }
+
+  // ignore: unused_element
+  static String formatFares(String fares) {
+    String fare = double.parse(fares).toStringAsFixed(5);
+    return fare;
   }
 
   static String formatRideDate(String date) {

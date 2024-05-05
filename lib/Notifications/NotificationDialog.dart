@@ -19,7 +19,7 @@ class NotificationDialog extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 1.0,
         child: Container(
-            margin: EdgeInsets.all(5.0),
+            margin: EdgeInsets.all(2.0),
             width: double.infinity,
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(15.0)),
@@ -70,7 +70,7 @@ class NotificationDialog extends StatelessWidget {
                 Padding(
                     padding: EdgeInsets.fromLTRB(20, 5, 20, 15),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TextButton(
                             style: TextButton.styleFrom(
@@ -82,7 +82,7 @@ class NotificationDialog extends StatelessWidget {
                                 color: Colors.red,
                               ),
                               padding: EdgeInsets.symmetric(
-                                  vertical: 12.0, horizontal: 25),
+                                  vertical: 10.0, horizontal: 25),
                             ),
                             onPressed: () {
                               audioPlayer.stop();
@@ -94,9 +94,9 @@ class NotificationDialog extends StatelessWidget {
                         TextButton(
                             style: TextButton.styleFrom(
                               padding: EdgeInsets.symmetric(
-                                  vertical: 12.0, horizontal: 25),
+                                  vertical: 10.0, horizontal: 25),
                               backgroundColor: Colors.green,
-                              textStyle: const TextStyle(
+                              textStyle: TextStyle(
                                 color: Colors.white,
                               ),
                               shape: RoundedRectangleBorder(

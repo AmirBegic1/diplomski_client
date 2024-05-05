@@ -65,7 +65,8 @@ class _RatingPageState extends State<RatingPage>
     super.build(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Your current rating"),
+        title:
+            Text("Your current rating", style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.black87,
         centerTitle: true,
         systemOverlayStyle: SystemUiOverlayStyle.light,
