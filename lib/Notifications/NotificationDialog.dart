@@ -10,7 +10,7 @@ import 'package:flutter/widgets.dart';
 
 class NotificationDialog extends StatelessWidget {
   final RideInfo details;
-  const NotificationDialog({required this.details});
+  NotificationDialog({required this.details});
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -72,43 +72,48 @@ class NotificationDialog extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        TextButton(
-                            style: TextButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(25.0),
-                                  side: BorderSide(color: Colors.red)),
-                              backgroundColor: Colors.white,
-                              textStyle: const TextStyle(
-                                color: Colors.red,
+                        Expanded(
+                          child: TextButton(
+                              style: TextButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25.0),
+                                    side: BorderSide(color: Colors.red)),
+                                backgroundColor: Colors.white,
+                                textStyle: TextStyle(
+                                  color: Colors.red,
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 25),
                               ),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10.0, horizontal: 25),
-                            ),
-                            onPressed: () {
-                              audioPlayer.stop();
-                              Navigator.pop(context);
-                            },
-                            child: Text("Cancel".toUpperCase(),
-                                style: TextStyle(fontSize: 14.0))),
+                              onPressed: () {
+                                audioPlayer.stop();
+                                Navigator.pop(context);
+                              },
+                              child: Text("Cancel".toUpperCase(),
+                                  style: TextStyle(fontSize: 14.0))),
+                        ),
                         SizedBox(width: 25.0),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10.0, horizontal: 25),
-                              backgroundColor: Colors.green,
-                              textStyle: TextStyle(
-                                color: Colors.white,
+                        Expanded(
+                          child: TextButton(
+                              style: TextButton.styleFrom(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 25),
+                                backgroundColor: Colors.green,
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25.0),
+                                    side:
+                                        const BorderSide(color: Colors.green)),
                               ),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(25.0),
-                                  side: const BorderSide(color: Colors.green)),
-                            ),
-                            onPressed: () {
-                              audioPlayer.stop();
-                              checkAvailableRide(context);
-                            },
-                            child: Text("Accept".toUpperCase(),
-                                style: TextStyle(fontSize: 14.0)))
+                              onPressed: () {
+                                audioPlayer.stop();
+                                checkAvailableRide(context);
+                              },
+                              child: Text("Accept".toUpperCase(),
+                                  style: TextStyle(fontSize: 14.0))),
+                        )
                       ],
                     )),
                 SizedBox(height: 10.0)

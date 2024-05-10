@@ -121,7 +121,7 @@ class LoginScreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0)),
                 ),
-                child: const SizedBox(
+                child: SizedBox(
                     height: 50.0,
                     width: 250,
                     child: Row(
@@ -132,8 +132,9 @@ class LoginScreen extends StatelessWidget {
                           SizedBox(width: 20),
                           Center(
                               child: Text("Login with Facebook",
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                      fontSize: 18.0,
+                                      fontSize: 15.0,
                                       fontFamily: "Brand-Bold"))),
                         ])),
                 onPressed: () {},
