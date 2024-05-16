@@ -52,9 +52,9 @@ class PushNotification {
   void getRequestInfo(String rideId, BuildContext context) {
     newRequestsRef.child(rideId).get().then((DataSnapshot data) {
       if (data.value != null) {
-        // audioPlayer.open(Audio("sounds/ring.mp3"));
-        // audioPlayer.play();
-//(data.child("phone").value.toString());
+        audioPlayer.open(Audio("sounds/ring.mp3"));
+        audioPlayer.play();
+        (data.child("phone").value.toString());
         double pickUpLat = double.parse(
             data.child("pickup").child('latitude').value.toString());
         double pickUpLng = double.parse(
