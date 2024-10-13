@@ -36,7 +36,7 @@ class PushNotification {
     driverRef.child(currentUser!.uid).child("token").set(tok);
     fbMessage.subscribeToTopic("allDrivers");
     fbMessage.subscribeToTopic("allUsers");
-    return tok.toString();
+    return tok!;
   }
 
   String getRideId(Map<String, dynamic> message) {

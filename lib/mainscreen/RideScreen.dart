@@ -438,9 +438,9 @@ class _RideScreenState extends State<RideScreen> {
         .get()
         .then((DataSnapshot data) {
       double totalFare;
-      if (data.value != null)
+      if (data.value != null) {
         totalFare = fare + double.parse(data.value.toString());
-      else
+      } else
         totalFare = fare;
       driverRef
           .child(currentUser!.uid)

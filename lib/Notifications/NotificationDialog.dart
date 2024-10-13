@@ -125,7 +125,7 @@ class NotificationDialog extends StatelessWidget {
     await requestsRef.get().then((DataSnapshot snap) {
       Navigator.pop(context);
       String rideId = "";
-      if (snap.value != null) {
+      if (snap.exists) {
         rideId = snap.value.toString();
       } else {
         displayToastMessage("Ride does not exist", context);

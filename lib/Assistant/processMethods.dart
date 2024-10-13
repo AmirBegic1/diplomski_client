@@ -48,9 +48,9 @@ class processMethods {
       return total;
   }
 
-  static void disableHomeLocationUpdate() {
+  static void disableHomeLocationUpdate() async {
     homePageSubscription?.pause();
-    Geofire.removeLocation(currentUser!.uid);
+    await Geofire.removeLocation(currentUser!.uid);
   }
 
   static void enableHomeLocationUpdate() async {

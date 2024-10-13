@@ -180,11 +180,14 @@ class _HomePageState extends State<HomePage>
   void updateLocationAsync() async {
     homePageSubscription =
         Geolocator.getPositionStream().listen((Position p) async {
-      currentPos = p;
+      // currentPos = p;
       if (isActive) {
-        await Geofire.setLocation(currentUser!.uid, p.latitude, p.longitude);
+        await Geofire.setLocation(
+            currentUser!.uid, currentPos!.latitude, currentPos!.longitude);
       }
-      LatLng pos = LatLng(p.latitude, p.longitude);
+      LatLng pos = LatLng(currentPos!.latitude, currentPos!.longitude);
+      print('OVDJE JE ZAPISANO');
+      print(currentPos!.latitude);
       GMap?.animateCamera(CameraUpdate.newLatLng(pos));
     });
   }
