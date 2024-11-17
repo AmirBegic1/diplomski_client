@@ -32,6 +32,15 @@ class _EarningsPageState extends State<EarningsPage>
           "Total earnings",
           style: TextStyle(color: Colors.white),
         ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            color: Colors.white,
+          ),
+        ),
         backgroundColor: Colors.black,
         centerTitle: true,
         systemOverlayStyle: SystemUiOverlayStyle.light,
@@ -60,7 +69,7 @@ class _EarningsPageState extends State<EarningsPage>
                       ),
                     ),
                     Text(
-                        "${double.parse(Provider.of<AppData>(context, listen: false).earnings).toStringAsFixed(2)} BAM",
+                        "${double.parse(Provider.of<AppData>(context, listen: false).earnings!).toStringAsFixed(2)} BAM",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 40,

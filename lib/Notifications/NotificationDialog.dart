@@ -10,7 +10,7 @@ import 'package:flutter/widgets.dart';
 
 class NotificationDialog extends StatelessWidget {
   final RideInfo details;
-  NotificationDialog({required this.details});
+  const NotificationDialog({super.key, required this.details});
   @override
   Widget build(BuildContext context) {
     return Dialog(

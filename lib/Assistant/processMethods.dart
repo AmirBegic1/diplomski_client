@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:diplomski_client/Models/address.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import 'package:flutter_geofire/flutter_geofire.dart';
 import 'package:diplomski_client/Assistant/httpRequest.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:diplomski_client/DataHandler/appData.dart';
 import 'package:diplomski_client/Models/Directions.dart';
@@ -107,6 +109,26 @@ class processMethods {
         }
       });
     }
+  }
+
+  static Future<String> searchCoordinatesAddress(Position pos, context) async {
+    String place = "";
+    String target =
+        "https://maps.googleapis.com/maps/api/geocode/json?latlng=${pos.latitude},${pos.longitude}&key=$mapKey";
+    var response = await httpRequest.getRequest(target);
+    if (response != "failed") {
+      place = response["results"][0]["address_components"][1]["long_name"] +
+          ' ' +
+          response["results"][0]["address_components"][0]["long_name"] +
+          ", " +
+          response["results"][0]["address_components"][2]["long_name"];
+      Address userPickup = Address();
+      userPickup.lng = pos.longitude;
+      userPickup.lat = pos.latitude;
+      userPickup.name = place;
+      // Provider.of<AppData>(context, listen: false).updatePickup(userPickup);
+    }
+    return place;
   }
 
   // ignore: unused_element

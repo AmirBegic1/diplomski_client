@@ -32,10 +32,10 @@
               "client_type": 3
             },
             {
-              "client_id": "845547046753-e5err1o45321lqu8bjnrekui7i0k9rhf.apps.googleusercontent.com",
+              "client_id": "845547046753-cgj8oep7t9h50ismc20e4o1kt8c82lju.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.diplomskiUser"
+                "bundle_id": "com.example.diplomskiClient"
               }
             }
           ]
@@ -68,10 +68,10 @@
               "client_type": 3
             },
             {
-              "client_id": "845547046753-e5err1o45321lqu8bjnrekui7i0k9rhf.apps.googleusercontent.com",
+              "client_id": "845547046753-cgj8oep7t9h50ismc20e4o1kt8c82lju.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.diplomskiUser"
+                "bundle_id": "com.example.diplomskiClient"
               }
             }
           ]

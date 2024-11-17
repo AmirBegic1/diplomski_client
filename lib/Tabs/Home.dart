@@ -13,6 +13,7 @@ import 'package:diplomski_client/Notifications/PushNotification.dart';
 import 'package:diplomski_client/main.dart';
 import 'package:diplomski_client/mainscreen/registrationScreen.dart';
 import 'package:diplomski_client/mapConfig.dart';
+import 'package:diplomski_client/Assistant/processMethods.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -63,8 +64,8 @@ class _HomePageState extends State<HomePage>
     LatLng latLngPosition = LatLng(pos.latitude, pos.longitude);
     CameraPosition cameraPos = CameraPosition(target: latLngPosition, zoom: 16);
     GMap?.animateCamera(CameraUpdate.newCameraPosition(cameraPos));
-    // String address = await processMethods.searchCoordinatesAddress(pos, context);
-    // print("This is your address : " + address);
+    var address = await processMethods.searchCoordinatesAddress(pos, context);
+    print("This is your address : " + address);
   }
 
   void getDriverInfo() async {
@@ -99,7 +100,7 @@ class _HomePageState extends State<HomePage>
           myLocationEnabled: true,
           zoomGesturesEnabled: true,
           zoomControlsEnabled: true,
-          // buildingsEnabled: true,
+          buildingsEnabled: true,
           padding: EdgeInsets.only(top: 30, bottom: 20),
           onMapCreated: (GoogleMapController controller) {
             _controllerGMap.complete(controller);
@@ -177,7 +178,7 @@ class _HomePageState extends State<HomePage>
     requestsRef.onValue.listen((event) {});
   }
 
-  void updateLocationAsync() async {
+  void updateLocationAsync() {
     homePageSubscription =
         Geolocator.getPositionStream().listen((Position p) async {
       // currentPos = p;

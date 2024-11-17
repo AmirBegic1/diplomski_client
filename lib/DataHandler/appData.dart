@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:diplomski_client/Models/RideHistory.dart';
 
 class AppData extends ChangeNotifier {
-  String earnings = "0";
-  int numberOfTrips = 0;
+  String? earnings = "0";
+  int? numberOfTrips = 0;
   List<String> tripKeys = [];
   List<RideHistory> historyKeys = [];
 

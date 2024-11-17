@@ -32,7 +32,7 @@ class _RatingPageState extends State<RatingPage>
         .then((DataSnapshot data) {
       if (data.value != null) {
         double ratings = double.parse(data.value.toString()) /
-            Provider.of<AppData>(context, listen: false).numberOfTrips;
+            Provider.of<AppData>(context, listen: false).numberOfTrips!;
         setState(() {
           numberOfStars = ratings;
         });
