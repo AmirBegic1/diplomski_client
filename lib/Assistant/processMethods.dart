@@ -61,7 +61,7 @@ class processMethods {
         currentUser!.uid, currentPos!.latitude, currentPos!.longitude);
   }
 
-  static Future<void> getRidesHistory(context) async {
+  static void getRidesHistory(context) {
     driverRef
         .child(currentUser!.uid)
         .child("earnings")
@@ -69,11 +69,11 @@ class processMethods {
         .then((DataSnapshot data) {
       if (data.value != null) {
         String earnings = data.value.toString();
-        double earning = double.parse(earnings);
-        String gotovo = earning.toStringAsFixed(3);
-
+        // double earning = double.parse(earnings);
+        // String gotovo = earning.toStringAsFixed(3);
+//pogeldaj kao dole na ovo updatetripsList
         Provider.of<AppData>(context, listen: false)
-            .updateTotalEarnings(gotovo);
+            .updateTotalEarnings(earnings);
       }
     });
 

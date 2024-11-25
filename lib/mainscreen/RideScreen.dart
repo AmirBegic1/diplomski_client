@@ -446,7 +446,7 @@ class _RideScreenState extends State<RideScreen> {
       driverRef
           .child(currentUser!.uid)
           .child("earnings")
-          .set(totalFare.toStringAsFixed(2));
+          .set(totalFare.toStringAsFixed(3));
     });
   }
 }

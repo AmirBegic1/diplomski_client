@@ -8,6 +8,8 @@ import 'package:diplomski_client/mainscreen/RideHistoryScreen.dart';
 import 'package:diplomski_client/mainscreen/registrationScreen.dart';
 
 class EarningsPage extends StatefulWidget {
+  const EarningsPage({super.key});
+
   @override
   _EarningsPageState createState() => _EarningsPageState();
 }
