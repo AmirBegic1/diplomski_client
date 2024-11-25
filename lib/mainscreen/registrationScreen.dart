@@ -36,7 +36,7 @@ class RegistrationScreen extends StatelessWidget {
                       color: Colors.white)),
               SizedBox(height: 22),
               const Text(
-                "Register as Driver",
+                "Registruj se kao vozač",
                 style: TextStyle(
                     fontSize: 24.0,
                     fontFamily: "Brand-Bold",
@@ -54,7 +54,7 @@ class RegistrationScreen extends StatelessWidget {
                         decoration: const InputDecoration(
                             enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white)),
-                            labelText: "Name",
+                            labelText: "Ime i prezime",
                             labelStyle:
                                 TextStyle(fontSize: 14.0, color: Colors.white),
                             hintStyle:
@@ -82,7 +82,7 @@ class RegistrationScreen extends StatelessWidget {
                         decoration: const InputDecoration(
                             enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white)),
-                            labelText: "Phone",
+                            labelText: "Broj telefona",
                             labelStyle:
                                 TextStyle(fontSize: 14.0, color: Colors.white),
                             hintStyle:
@@ -114,7 +114,7 @@ class RegistrationScreen extends StatelessWidget {
                         child: const SizedBox(
                             height: 50.0,
                             child: Center(
-                                child: Text("Create Account",
+                                child: Text("Kreiraj profil!",
                                     style: TextStyle(
                                         fontSize: 18.0,
                                         fontFamily: "Brand-Bold")))),
@@ -124,19 +124,17 @@ class RegistrationScreen extends StatelessWidget {
                               caseSensitive: false,
                               multiLine: false);
                           if (!exp.hasMatch(emailTEC.text)) {
-                            displayToastMessage(
-                                "Email address is not valid", context);
+                            displayToastMessage("Email nije validan", context);
                           } else if (nameTEC.text.length < 4) {
                             displayToastMessage(
                                 "Name must be at least 4 characters long",
                                 context);
                           } else if (phoneTEC.text.isEmpty) {
                             displayToastMessage(
-                                "Phone number field cannot be left empty",
-                                context);
+                                "Morate unijet broj telefona", context);
                           } else if (passTEC.text.length < 8) {
                             displayToastMessage(
-                                "Password must be at least 8 characters long",
+                                "Password mora imati najmanje 8 karaktera",
                                 context);
                           } else
                             registerNewUser(context);
@@ -152,7 +150,7 @@ class RegistrationScreen extends StatelessWidget {
                     Navigator.pushNamedAndRemoveUntil(
                         context, LoginScreen.idScreen, (route) => false);
                   },
-                  child: const Text("Already have an account? Login here",
+                  child: const Text("Već imaš profil? Logiraj se!",
                       style: TextStyle(color: Colors.teal)))
             ],
           ),
@@ -187,7 +185,7 @@ class RegistrationScreen extends StatelessWidget {
       };
       driverRef.child(fbUser.uid).set(userDM);
       currentUser = fbUser;
-      displayToastMessage("Your account has been created", context);
+      displayToastMessage("VAŠ PROFIL JE USPJEŠNO KREIRAN!", context);
       Navigator.pushNamed(context, CarDataScreen.idScreen);
     } else {
       Navigator.pop(context);

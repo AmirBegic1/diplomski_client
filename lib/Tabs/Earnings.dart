@@ -28,19 +28,19 @@ class _EarningsPageState extends State<EarningsPage>
     super.build(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Total earnings",
+        title: const Text(
+          "Vaši prihodi",
           style: TextStyle(color: Colors.white),
         ),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.keyboard_arrow_left,
-            color: Colors.white,
-          ),
-        ),
+        // leading: IconButton(
+        //   onPressed: () {
+        //     Navigator.pop(context);
+        //   },
+        //   icon: Icon(
+        //     Icons.keyboard_arrow_left,
+        //     color: Colors.white,
+        //   ),
+        // ),
         backgroundColor: Colors.black,
         centerTitle: true,
         systemOverlayStyle: SystemUiOverlayStyle.light,
@@ -56,12 +56,12 @@ class _EarningsPageState extends State<EarningsPage>
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 45),
                 child: Column(children: [
-                  Text("Your total earnings today are:",
+                  const Text("Vaša ukupna zarada je:",
                       style: TextStyle(color: Colors.white, fontSize: 16)),
                   SizedBox(height: 15),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     Padding(
-                      padding: const EdgeInsets.only(right: 15),
+                      padding: EdgeInsets.only(right: 15),
                       child: Icon(
                         Icons.account_balance_wallet_outlined,
                         color: Colors.white,
@@ -69,7 +69,7 @@ class _EarningsPageState extends State<EarningsPage>
                       ),
                     ),
                     Text(
-                        "${double.parse(Provider.of<AppData>(context, listen: false).earnings!).toStringAsFixed(2)} BAM",
+                        "${double.parse(Provider.of<AppData>(context, listen: false).earnings!).toStringAsFixed(5)} BAM",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 40,
@@ -81,11 +81,12 @@ class _EarningsPageState extends State<EarningsPage>
             // padding: EdgeInsets.all(0),
             onPressed: () {
               if (Provider.of<AppData>(context, listen: false).numberOfTrips !=
-                  0)
+                  0) {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => HistoryScreen()));
-              else
-                displayToastMessage("No trips have been made", context);
+              } else {
+                displayToastMessage("Još niste odradili vožnje", context);
+              }
             },
             child: Padding(
               padding: EdgeInsets.fromLTRB(20, 18, 30, 18),
@@ -97,7 +98,8 @@ class _EarningsPageState extends State<EarningsPage>
                     height: 40,
                   ),
                   SizedBox(width: 20),
-                  Text("Total number of trips", style: TextStyle(fontSize: 16)),
+                  const Text("Ukupan broj vožnji",
+                      style: TextStyle(fontSize: 16)),
                   Expanded(
                     child: Container(
                       child: Text(
@@ -105,7 +107,8 @@ class _EarningsPageState extends State<EarningsPage>
                             .numberOfTrips
                             .toString(),
                         textAlign: TextAlign.end,
-                        style: TextStyle(fontSize: 18, color: Colors.teal),
+                        style:
+                            const TextStyle(fontSize: 18, color: Colors.teal),
                       ),
                     ),
                   )

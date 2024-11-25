@@ -35,7 +35,7 @@ class LoginScreen extends StatelessWidget {
                       color: Colors.white)),
               SizedBox(height: 22.0),
               const Text(
-                "Login as Driver",
+                "Prijavi se kao vozač",
                 style: TextStyle(
                     fontSize: 24.0,
                     fontFamily: "Brand-Bold",
@@ -101,10 +101,10 @@ class LoginScreen extends StatelessWidget {
                               multiLine: false);
                           if (!exp.hasMatch(emailTEC.text)) {
                             displayToastMessage(
-                                "Email address is not valid", context);
+                                "Email adresa nije validna!", context);
                           } else if (passTEC.text.length < 8) {
                             displayToastMessage(
-                                "Password must be at least 8 characters long",
+                                "Password mora imati 8 ili više karaktera!",
                                 context);
                           } else
                             // ignore: curly_braces_in_flow_control_structures
@@ -117,14 +117,14 @@ class LoginScreen extends StatelessWidget {
               TextButton(
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.blue,
-                  textStyle: TextStyle(color: Colors.white),
+                  textStyle: const TextStyle(color: Colors.white),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0)),
                 ),
                 child: SizedBox(
                     height: 50.0,
                     width: 250,
-                    child: Row(
+                    child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -143,11 +143,11 @@ class LoginScreen extends StatelessWidget {
               TextButton(
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.white,
-                  textStyle: TextStyle(color: Colors.black),
+                  textStyle: const TextStyle(color: Colors.black),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0)),
                 ),
-                child: const SizedBox(
+                child: SizedBox(
                     height: 50.0,
                     width: 250,
                     child: Row(
@@ -173,7 +173,7 @@ class LoginScreen extends StatelessWidget {
                     Navigator.pushNamedAndRemoveUntil(
                         context, RegistrationScreen.idScreen, (route) => false);
                   },
-                  child: const Text("Don't have an account? Register here",
+                  child: const Text("Nemaš profil? registuj se SADA!",
                       style: TextStyle(color: Colors.teal))),
             ],
           ),

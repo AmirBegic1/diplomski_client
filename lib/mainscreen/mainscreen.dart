@@ -46,14 +46,14 @@ class _MainScreenState extends State<MainScreen>
       ),
       bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.map), label: "Map"),
+            BottomNavigationBarItem(icon: Icon(Icons.map), label: "Mapa"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.credit_card), label: "Earnings"),
+                icon: Icon(Icons.credit_card), label: "Prihodi"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.star),
-                label: "Ratings",
+                label: "Ocjena",
                 backgroundColor: Colors.green),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Account")
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profil")
           ],
           unselectedItemColor: Colors.black26,
           selectedItemColor: Colors.teal,

@@ -49,7 +49,7 @@ class PushNotification {
     return rideId;
   }
 
-  void getRequestInfo(String rideId, BuildContext context) {
+  Future<void> getRequestInfo(String rideId, BuildContext context) async {
     newRequestsRef.child(rideId).get().then((DataSnapshot data) {
       if (data.value != null) {
         audioPlayer.open(Audio("sounds/ring.mp3"));

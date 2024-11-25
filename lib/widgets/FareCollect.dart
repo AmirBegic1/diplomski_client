@@ -24,7 +24,7 @@ class FareCollect extends StatelessWidget {
             children: [
               SizedBox(height: 22.0),
               Text(
-                "Total fare for ${rideType.toUpperCase()}",
+                "Ukupna cijena za ${rideType.toUpperCase()}",
                 style: TextStyle(color: Colors.black),
               ),
               SizedBox(height: 22.0),
@@ -34,10 +34,10 @@ class FareCollect extends StatelessWidget {
                       fontFamily: "Brand-Regular",
                       color: Colors.teal)),
               SizedBox(height: 22.0),
-              const Padding(
+              Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.0),
                   child: Text(
-                      "This is the total trip amount that has been charged to the rider (the fare may differ based on the trip completion)",
+                      "Ovo je ukupna cijena koju musterija treba platiti za obavljenu vožnju!",
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.black, fontSize: 13))),
               SizedBox(height: 30.0),
@@ -61,12 +61,12 @@ class FareCollect extends StatelessWidget {
                       //     borderRadius: BorderRadius.circular(30),
                       //     side: BorderSide(color: Colors.black, width: 1.2)),
                       // color: Colors.teal,
-                      child: const Padding(
+                      child: Padding(
                         padding: EdgeInsets.all(17.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Collect cash",
+                            Text("Preuzmi novac",
                                 style: TextStyle(
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.bold,

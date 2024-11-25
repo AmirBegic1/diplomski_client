@@ -19,25 +19,25 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.black87,
         appBar: AppBar(
-          title: Text(
-            "Profile info",
+          title: const Text(
+            "O vama",
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.black,
           centerTitle: true,
           systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
-        body: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(vertical: 20),
+        body: Padding(
+            padding: EdgeInsets.symmetric(vertical: 10),
             child: Column(children: [
               SizedBox(
-                height: 115,
-                width: 115,
+                height: 100,
+                width: 100,
                 child: Stack(
                   clipBehavior: Clip.none,
                   fit: StackFit.expand,
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                         backgroundImage: AssetImage("images/user_icon.png")),
                     Positioned(
                       right: -16,
@@ -50,11 +50,11 @@ class ProfilePage extends StatelessWidget {
                             style: TextButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(50),
-                                  side: BorderSide(color: Colors.white)),
-                              backgroundColor: Color(0xFFF5F6F9),
+                                  side: const BorderSide(color: Colors.white)),
+                              backgroundColor: const Color(0xFFF5F6F9),
                             ),
                             onPressed: () {},
-                            child: Icon(Icons.camera_alt),
+                            child: const Icon(Icons.camera_alt),
                           ),
                         ),
                       ),
@@ -67,21 +67,21 @@ class ProfilePage extends StatelessWidget {
                   style: const TextStyle(fontSize: 30, color: Colors.white)),
               SizedBox(height: 20),
               ProfileInfo(
-                  type: "Profile ID",
+                  type: "Profil ID",
                   text: drivers!.id,
                   icon: Icons.perm_identity),
               ProfileInfo(
-                type: "Email address",
+                type: "Email addresa",
                 text: drivers!.email!,
                 icon: Icons.email,
               ),
               ProfileInfo(
-                type: "Phone number",
+                type: "Broj telefona",
                 text: drivers!.phone!,
                 icon: Icons.phone,
               ),
               ProfileInfo(
-                type: "Your car",
+                type: "Vaše auto",
                 text: drivers!.car_color! + ' ' + drivers!.car_model!,
                 icon: Icons.car_rental,
                 trailingIcon: Icons.add,
@@ -106,17 +106,19 @@ class ProfilePage extends StatelessWidget {
                             requestsRef.remove();
                             // requestsRef = null;
                             FirebaseAuth.instance.signOut();
-                            displayToastMessage("Sign out successful", context);
+                            displayToastMessage(
+                                "Upravo ste odjavljeni!", context);
                             Navigator.pushNamedAndRemoveUntil(context,
                                 LoginScreen.idScreen, (route) => false);
                           },
+                          // ignore: prefer_const_constructors
                           child: Padding(
                               padding: EdgeInsets.all(13.0),
-                              child: Row(
+                              child: const Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text("Sign out   ",
+                                    Text("Odjavi se   ",
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.bold,
@@ -138,7 +140,8 @@ class ProfileInfo extends StatelessWidget {
   Function()? onPressed;
 
   ProfileInfo(
-      {this.text,
+      {super.key,
+      this.text,
       this.icon,
       this.onPressed,
       this.type,
@@ -157,14 +160,14 @@ class ProfileInfo extends StatelessWidget {
                   color: color != null ? color : Colors.black87, size: 40),
               title: Text(
                 type!,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.black87,
                     fontSize: 16.0,
                     fontFamily: "Brand-Bold"),
               ),
               subtitle: Text(
                 text!,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.teal, fontSize: 12, fontFamily: "Brand-Bold"),
               ),
               trailing: Icon(trailingIcon, color: Colors.teal)),

@@ -5,7 +5,7 @@ import 'package:diplomski_client/Models/RideHistory.dart';
 // ignore: must_be_immutable
 class RideHistoryItem extends StatelessWidget {
   RideHistory history;
-  RideHistoryItem({required this.history});
+  RideHistoryItem({super.key, required this.history});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,18 +18,18 @@ class RideHistoryItem extends StatelessWidget {
                 Container(
                   child: Row(
                     children: <Widget>[
-                      Icon(Icons.location_on, size: 25),
+                      const Icon(Icons.location_on, size: 25),
                       SizedBox(width: 18),
                       Expanded(
                           child: Container(
                               child: Text(history.pickUp!,
-                                  style: TextStyle(fontSize: 18.0)))),
+                                  style: const TextStyle(fontSize: 18.0)))),
                     ],
                   ),
                 ),
                 SizedBox(height: 10),
                 Row(mainAxisSize: MainAxisSize.max, children: <Widget>[
-                  Icon(Icons.flag_outlined, size: 25),
+                  const Icon(Icons.flag_outlined, size: 25),
                   SizedBox(width: 18),
                   Text(history.dropOff!, style: const TextStyle(fontSize: 18))
                 ]),
@@ -37,7 +37,7 @@ class RideHistoryItem extends StatelessWidget {
                 TextButton(
                   onPressed: () {},
                   child: Container(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,

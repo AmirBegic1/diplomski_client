@@ -89,7 +89,7 @@ class NotificationDialog extends StatelessWidget {
                                 audioPlayer.stop();
                                 Navigator.pop(context);
                               },
-                              child: Text("Cancel".toUpperCase(),
+                              child: Text("Ne".toUpperCase(),
                                   style: TextStyle(fontSize: 14.0))),
                         ),
                         SizedBox(width: 25.0),
@@ -111,7 +111,7 @@ class NotificationDialog extends StatelessWidget {
                                 audioPlayer.stop();
                                 checkAvailableRide(context);
                               },
-                              child: Text("Accept".toUpperCase(),
+                              child: Text("Da".toUpperCase(),
                                   style: TextStyle(fontSize: 14.0))),
                         )
                       ],

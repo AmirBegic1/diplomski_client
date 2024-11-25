@@ -20,12 +20,13 @@ class ProgressDialog extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(width: 6.0),
-                  CircularProgressIndicator(
+                  const CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.black)),
                   SizedBox(width: 26.0),
                   Text(message,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: Colors.black, fontSize: 10.0))
+                      style:
+                          const TextStyle(color: Colors.black, fontSize: 10.0))
                 ],
               ),
             )));

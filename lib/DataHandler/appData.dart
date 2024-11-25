@@ -7,7 +7,7 @@ class AppData extends ChangeNotifier {
   List<String> tripKeys = [];
   List<RideHistory> historyKeys = [];
 
-  void updateTotalEarnings(String newEarnings) {
+  Future<void> updateTotalEarnings(String newEarnings) async {
     earnings = newEarnings;
     notifyListeners();
   }

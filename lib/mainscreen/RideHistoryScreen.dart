@@ -16,8 +16,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
-          title:
-              const Text("Trip history", style: TextStyle(color: Colors.white)),
+          title: const Text("Histroija vožnji",
+              style: TextStyle(color: Colors.white)),
           backgroundColor: Colors.black87,
           leading: IconButton(
             onPressed: () {

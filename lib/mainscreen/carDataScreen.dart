@@ -39,7 +39,7 @@ class _CarDataScreenState extends State<CarDataScreen> {
                 padding: EdgeInsets.fromLTRB(22.0, 22.0, 22.0, 32.0),
                 child: Column(
                   children: [
-                    Text("Enter your car details",
+                    const Text("Unesite Vaše auto:",
                         style: TextStyle(
                             fontFamily: "Brand-Bold",
                             fontSize: 24.0,
@@ -47,50 +47,53 @@ class _CarDataScreenState extends State<CarDataScreen> {
                     SizedBox(height: 30.0),
                     TextField(
                         controller: modelTEC,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white)),
-                            labelText: "Car model",
+                            labelText: "Naziv marke vozila",
                             labelStyle:
                                 TextStyle(fontSize: 14.0, color: Colors.white),
                             hintStyle:
                                 TextStyle(color: Colors.teal, fontSize: 10.0)),
-                        style: TextStyle(fontSize: 15.0, color: Colors.white)),
+                        style: const TextStyle(
+                            fontSize: 15.0, color: Colors.white)),
                     SizedBox(height: 10.0),
                     TextField(
                         controller: platesTEC,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white)),
-                            labelText: "Registration plates",
+                            labelText: "Registacijske tablice",
                             labelStyle:
                                 TextStyle(fontSize: 14.0, color: Colors.white),
                             hintStyle:
                                 TextStyle(color: Colors.teal, fontSize: 10.0)),
-                        style: TextStyle(fontSize: 15.0, color: Colors.white)),
+                        style: const TextStyle(
+                            fontSize: 15.0, color: Colors.white)),
                     SizedBox(height: 10.0),
                     TextField(
                         controller: colorTEC,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white)),
-                            labelText: "Car colour",
+                            labelText: "Boja Vašeg vozila",
                             labelStyle:
                                 TextStyle(fontSize: 14.0, color: Colors.white),
                             hintStyle:
                                 TextStyle(color: Colors.teal, fontSize: 10.0)),
-                        style: TextStyle(fontSize: 15.0, color: Colors.white)),
+                        style: const TextStyle(
+                            fontSize: 15.0, color: Colors.white)),
                     SizedBox(height: 30.0),
-                    Text("Your car type",
+                    const Text("Vrsta Vašeg vozila",
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.white, fontSize: 16)),
                     SizedBox(height: 10.0),
                     DropdownButton(
                         dropdownColor: Colors.teal,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white, fontFamily: "Brand-Bold"),
                         value: categoryVar,
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.arrow_drop_down,
                           color: Colors.white,
                         ),
@@ -123,12 +126,12 @@ class _CarDataScreenState extends State<CarDataScreen> {
                                   multiLine: false);
                               if (modelTEC.text.isEmpty) {
                                 displayToastMessage(
-                                    "The car model field is mandatory",
+                                    "Morate označiti vrstu Vašeg vozila!",
                                     context);
                               } else if (!exp.hasMatch(platesTEC.text))
                                 // ignore: curly_braces_in_flow_control_structures
                                 displayToastMessage(
-                                    "The registration plates are not valid",
+                                    "Registracijske tablice nisu validne!",
                                     context);
                               else if (colorTEC.text.isEmpty)
                                 // ignore: curly_braces_in_flow_control_structures
@@ -145,7 +148,7 @@ class _CarDataScreenState extends State<CarDataScreen> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text("Next",
+                                      Text("Dalje",
                                           style: TextStyle(
                                               fontSize: 20.0,
                                               fontWeight: FontWeight.bold,
@@ -168,7 +171,7 @@ class _CarDataScreenState extends State<CarDataScreen> {
       "type": categoryVar.toLowerCase()
     };
     driverRef.child(uid).child("car_data").set(carMap);
-    displayToastMessage("Registration successful", context);
+    displayToastMessage("Uspješna registracija!", context);
     Navigator.pushNamedAndRemoveUntil(
         context, MainScreen.idScreen, (route) => false);
   }

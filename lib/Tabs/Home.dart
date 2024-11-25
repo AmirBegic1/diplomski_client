@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 // import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 import 'package:geolocator/geolocator.dart';
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage>
     CameraPosition cameraPos = CameraPosition(target: latLngPosition, zoom: 16);
     GMap?.animateCamera(CameraUpdate.newCameraPosition(cameraPos));
     var address = await processMethods.searchCoordinatesAddress(pos, context);
-    print("This is your address : " + address);
+    print("Ovo je vaša adresa : " + address);
   }
 
   void getDriverInfo() async {
@@ -89,7 +90,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    // FlutterStatusbarcolor.setNavigationBarWhiteForeground(true);
+    FlutterStatusbarcolor.setNavigationBarWhiteForeground(true);
     return Stack(children: [
       GoogleMap(
 
@@ -115,7 +116,7 @@ class _HomePageState extends State<HomePage>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: TextButton(
                     style: TextButton.styleFrom(
                       shadowColor: statusColor,
@@ -133,8 +134,7 @@ class _HomePageState extends State<HomePage>
                           isActive = true;
                         });
                         displayToastMessage(
-                            "You are online now and visible to the riders",
-                            context);
+                            "Sada ste online i dostupni vozačima", context);
                       } else {
                         setOffline();
                         setState(() {
@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage>
                           isActive = false;
                         });
                         displayToastMessage(
-                            "You are offline now. The options are still available, but you're not visible to others",
+                            "Sada ste oflajn, trenutno niste vidljivi drugim vozačima",
                             context);
                       }
                     },
@@ -153,12 +153,12 @@ class _HomePageState extends State<HomePage>
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(status + '  ',
-                                  style: TextStyle(
+                              Text('$status  ',
+                                  style: const TextStyle(
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white)),
-                              Icon(Icons.phone_android,
+                              const Icon(Icons.phone_android,
                                   color: Colors.white, size: 21.0)
                             ]))))
           ],
@@ -178,7 +178,7 @@ class _HomePageState extends State<HomePage>
     requestsRef.onValue.listen((event) {});
   }
 
-  void updateLocationAsync() {
+  Future<void> updateLocationAsync() async {
     homePageSubscription =
         Geolocator.getPositionStream().listen((Position p) async {
       // currentPos = p;
@@ -193,7 +193,7 @@ class _HomePageState extends State<HomePage>
     });
   }
 
-  void setOffline() {
+  Future<void> setOffline() async {
     Geofire.removeLocation(currentUser!.uid);
     requestsRef.onDisconnect();
     requestsRef.remove();

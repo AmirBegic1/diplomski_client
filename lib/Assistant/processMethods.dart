@@ -61,7 +61,7 @@ class processMethods {
         currentUser!.uid, currentPos!.latitude, currentPos!.longitude);
   }
 
-  static void getRidesHistory(context) {
+  static Future<void> getRidesHistory(context) async {
     driverRef
         .child(currentUser!.uid)
         .child("earnings")
@@ -97,7 +97,7 @@ class processMethods {
     });
   }
 
-  static void getTripHistoryData(context) {
+  static Future<void> getTripHistoryData(context) async {
     Provider.of<AppData>(context, listen: false).resetHistoryMap();
     var keys = Provider.of<AppData>(context, listen: false).tripKeys;
     for (String element in keys) {

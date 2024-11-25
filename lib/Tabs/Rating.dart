@@ -24,7 +24,7 @@ class _RatingPageState extends State<RatingPage>
     getRatings();
   }
 
-  getRatings() {
+  getRatings() async {
     driverRef
         .child(currentUser!.uid)
         .child("ratings")
@@ -38,23 +38,23 @@ class _RatingPageState extends State<RatingPage>
         });
         if (numberOfStars <= 1.5)
           setState(() {
-            title = "Very bad";
+            title = "Veoma loše";
           });
         else if (numberOfStars <= 2.5)
           setState(() {
-            title = "Bad";
+            title = "Loše";
           });
         else if (numberOfStars <= 3.5)
           setState(() {
-            title = "Good";
+            title = "Dobar";
           });
         else if (numberOfStars <= 4.5)
           setState(() {
-            title = "Very good";
+            title = "Vrlo dobar";
           });
         else
           setState(() {
-            title = "Excellent";
+            title = "Odličan";
           });
       }
     });
@@ -65,8 +65,8 @@ class _RatingPageState extends State<RatingPage>
     super.build(context);
     return Scaffold(
       appBar: AppBar(
-        title:
-            Text("Your current rating", style: TextStyle(color: Colors.white)),
+        title: const Text("Vaša trenutna ocjena",
+            style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.black87,
         centerTitle: true,
         systemOverlayStyle: SystemUiOverlayStyle.light,
@@ -87,11 +87,11 @@ class _RatingPageState extends State<RatingPage>
               children: [
                 SizedBox(height: 22.0),
                 Text(
-                    "Your current rating is " +
+                    "Vaša trenutna ocjena je: " +
                         (title == ""
-                            ? "not available at this moment.\nPerhaps we're having some issues updating your rating or you haven't done any rides recently."
+                            ? "nije dostupno trenutno.\nNažalost imamo nekih problema oko vaše ocjene ili niste vozili do sada."
                             : numberOfStars.toStringAsFixed(2)),
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 18.0,
                         fontFamily: "Brand-Regular",
                         color: Colors.white),
@@ -110,7 +110,7 @@ class _RatingPageState extends State<RatingPage>
                         //     isReadOnly: true),
                         SizedBox(height: 10.0),
                         Text(title,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 35.0,
                                 fontFamily: "Brand-Bold",
                                 color: Colors.white))

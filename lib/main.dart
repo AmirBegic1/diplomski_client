@@ -23,14 +23,14 @@ void main() async {
 
   await messaging.requestPermission(
     alert: true,
-    announcement: false,
+    announcement: true,
     badge: true,
     carPlay: false,
     criticalAlert: false,
     provisional: false,
     sound: true,
   );
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 DatabaseReference userRef = FirebaseDatabase.instance.ref().child("users");
@@ -44,7 +44,7 @@ DatabaseReference requestsRef = FirebaseDatabase.instance
     .child("newRide");
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
